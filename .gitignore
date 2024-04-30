@@ -8,7 +8,6 @@ target/
 !gradle-wrapper.jar
 *.war
 *.ear
-build/
 
 ### STS ###
 .apt_generated
