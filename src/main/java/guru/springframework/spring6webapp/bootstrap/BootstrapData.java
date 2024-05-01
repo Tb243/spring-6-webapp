@@ -31,6 +31,8 @@ public class BootstrapData implements CommandLineRunner {
         Author JohnSaved = authorRepository.save(John);
         Book SFGSaved = bookRepository.save(SFG);
 
+        authorRepository.save(JohnSaved);
+
         JohnSaved.getBooks().add(SFGSaved);
 
         System.out.println("In bootstrapping data");
