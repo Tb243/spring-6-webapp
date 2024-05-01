@@ -51,8 +51,9 @@ public class BootstrapData implements CommandLineRunner {
         Author JaneSaved = authorRepository.save(Jane);
         Book JAVBOOKSaved = bookRepository.save(JAVBOOK);
 
-        JohnSaved.getBooks().add(SFGSaved);
-        JaneSaved.getBooks().add(JAVBOOKSaved);
+        //Books class has the Join table, so only the books needed instead of both-way
+        //JohnSaved.getBooks().add(SFGSaved);
+        //JaneSaved.getBooks().add(JAVBOOKSaved);
         SFGSaved.getAuthors().add(JohnSaved);
         JAVBOOKSaved.getAuthors().add(JaneSaved);
 
