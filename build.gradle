@@ -6,7 +6,6 @@
 
 plugins {
     id 'java-library'
-    id 'maven-publish'
     id 'org.springframework.boot' version "${springVersion}"
 }
 
@@ -14,16 +13,18 @@ repositories {
     gradlePluginPortal()
     google()
     mavenCentral()
-    mavenLocal()
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
+    mavenLocal()
 
 }
 
 dependencies {
     api "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
     api "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    //implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     runtimeOnly 'com.h2database:h2:2.1.214'
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
@@ -33,14 +34,6 @@ group = 'guru.springframework'
 version = '0.0.1-SNAPSHOT'
 description = 'spring-6-webapp'
 java.sourceCompatibility = JavaVersion.VERSION_17
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
