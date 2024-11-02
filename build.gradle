@@ -5,6 +5,7 @@
  */
 
 plugins {
+    id 'java'
     id 'java-library'
     id 'org.springframework.boot' version "${springVersion}"
     id 'io.spring.dependency-management' version '1.1.6'
@@ -25,15 +26,22 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
     api "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
-    runtimeOnly 'com.h2database:h2:2.1.214'
+    runtimeOnly 'com.h2database:h2'
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 group = 'guru.springframework'
 version = '0.0.1-SNAPSHOT'
 description = 'spring-6-webapp'
 java.sourceCompatibility = JavaVersion.VERSION_17
+//java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -41,4 +49,7 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
+}
+tasks.named('test') {
+  useJUnitPlatform()
 }
