@@ -26,8 +26,9 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    runtimeOnly 'com.h2database:h2:2.1.214'
+    runtimeOnly 'com.h2database:h2:2.2.220'
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    testImplementation group: 'org.xmlunit', name: 'xmlunit-core', version: '2.10.0'
 }
 
 group = 'guru.springframework'
