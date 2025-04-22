@@ -22,14 +22,33 @@ repositories {
 
 }
 
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'net.minidev'  && details.requested.name == 'json-smart') {
+            details.useVersion "2.5.2"
+            //due to CVE-2024-57699
+        }
+        if (details.requested.group == 'org.xmlunit' && details.requested.name == 'xmlunit-core') {
+            details.useVersion "2.10.0"
+            //due to CVE-2024-31573
+        }
+        if (details.requested.group == 'org.apache.tomcat.embed' && details.requested.name == 'tomcat-embed-core') {
+            details.useVersion "10.1.35"
+            //due to CVE-2025-24813
+        }
+        if (details.requested.group == 'ch.qos.logback') {
+            details.useVersion "1.5.13"
+            //due to CVE-2024-12798
+        }
+    }
+}
+
 dependencies {
     api "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
     api "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     implementation "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
     runtimeOnly 'com.h2database:h2:2.3.232'
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
-    //due to CVE-2024-31573
-    testImplementation group: 'org.xmlunit', name: 'xmlunit-core', version: '2.10.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -45,11 +64,11 @@ java {
     }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-tasks.withType(Javadoc) {
+tasks.withType(Javadoc).configureEach {
     options.encoding = 'UTF-8'
 }
 tasks.named('test') {
