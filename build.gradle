@@ -33,11 +33,11 @@ configurations.configureEach {
             //due to CVE-2024-31573
         }
         if (details.requested.group == 'org.apache.tomcat.embed' && details.requested.name == 'tomcat-embed-core') {
-            details.useVersion "10.1.35"
+            details.useVersion "10.1.36"
             //due to CVE-2025-24813
         }
         if (details.requested.group == 'ch.qos.logback') {
-            details.useVersion "1.5.13"
+            details.useVersion "1.5.14"
             //due to CVE-2024-12798
         }
     }
